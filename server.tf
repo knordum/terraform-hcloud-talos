@@ -88,7 +88,7 @@ resource "hcloud_server" "control_planes" {
     ignore_changes = [
       user_data,
       image,
-      network.alias_ips
+      network
     ]
   }
 }
