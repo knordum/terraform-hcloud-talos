@@ -76,7 +76,7 @@ resource "hcloud_server" "control_planes" {
   network {
     network_id = hcloud_network_subnet.nodes.network_id
     ip         = each.value.ipv4_private
-    #alias_ips  = [] # fix for https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
+    alias_ips  = [] # fix for https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
   }
 
   depends_on = [
@@ -87,7 +87,8 @@ resource "hcloud_server" "control_planes" {
   lifecycle {
     ignore_changes = [
       user_data,
-      image
+      image,
+      network.alias_ips
     ]
   }
 }
